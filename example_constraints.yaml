@@ -73,7 +73,7 @@ manufacturing_constraints:
 
 topology_constraints:
   # Inclusive even-integer range for the pole-count sweep.
-  pole_count_range: [4, 28]
+  pole_count_range: [4, 50]
 
   # "auto" -> sweep all (Q, 2p) combos with q-denominator <= 8.
   # Or supply a list like [[12, 10], [12, 8]] to restrict the sweep.
