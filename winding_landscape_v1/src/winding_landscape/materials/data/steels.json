@@ -1,0 +1,75 @@
+{
+  "_comment": "Steel grades. Steinmetz coefficients (kh, alpha, beta, ke) are calibrated for SI units: P_iron[W/m^3] = kh * f^alpha * B^beta + ke * f^2 * B^2 * t_lam_mm^2. kh has units W/m^3 / (Hz^alpha * T^beta), ke has units W/m^3 / (Hz^2 * T^2 * mm^2). Calibrated against typical W/lb published values (M19 ~5 W/lb at 60Hz/1.5T). Sources: AK Steel/Cleveland-Cliffs and Cogent (Tata) public datasheets; replace with vendor-specific values for serious work.",
+  "M19_29Ga": {
+    "description": "Non-oriented silicon steel, 0.014 in (0.35 mm) lamination, Class 29.",
+    "lamination_thickness_mm": 0.35,
+    "stacking_factor": 0.96,
+    "density_kg_per_m3": 7650,
+    "BH_curve": [
+      [0, 0],
+      [50, 0.30],
+      [100, 0.70],
+      [200, 1.00],
+      [500, 1.30],
+      [1000, 1.45],
+      [2000, 1.55],
+      [5000, 1.65],
+      [10000, 1.75],
+      [20000, 1.85],
+      [50000, 1.95]
+    ],
+    "steinmetz_kh": 12.5,
+    "steinmetz_alpha": 1.6,
+    "steinmetz_beta": 2.0,
+    "eddy_ke": 12.0,
+    "saturation_B_T": 1.95
+  },
+  "M15_29Ga": {
+    "description": "Higher-grade non-oriented silicon steel, lower core loss than M19.",
+    "lamination_thickness_mm": 0.35,
+    "stacking_factor": 0.96,
+    "density_kg_per_m3": 7600,
+    "BH_curve": [
+      [0, 0],
+      [50, 0.32],
+      [100, 0.75],
+      [200, 1.05],
+      [500, 1.32],
+      [1000, 1.48],
+      [2000, 1.58],
+      [5000, 1.68],
+      [10000, 1.78],
+      [20000, 1.88],
+      [50000, 1.97]
+    ],
+    "steinmetz_kh": 10.0,
+    "steinmetz_alpha": 1.6,
+    "steinmetz_beta": 2.0,
+    "eddy_ke": 10.0,
+    "saturation_B_T": 1.97
+  },
+  "Hiperco50": {
+    "description": "Cobalt-iron, very high saturation; for high-power-density designs.",
+    "lamination_thickness_mm": 0.15,
+    "stacking_factor": 0.95,
+    "density_kg_per_m3": 8120,
+    "BH_curve": [
+      [0, 0],
+      [50, 0.50],
+      [100, 1.00],
+      [200, 1.40],
+      [500, 1.80],
+      [1000, 2.05],
+      [2000, 2.20],
+      [5000, 2.30],
+      [10000, 2.35],
+      [20000, 2.38],
+      [50000, 2.40]
+    ],
+    "steinmetz_kh": 20.0,
+    "steinmetz_alpha": 1.8,
+    "steinmetz_beta": 2.0,
+    "eddy_ke": 8.0,
+    "saturation_B_T": 2.35
+  }
+}

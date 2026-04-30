@@ -1,0 +1,109 @@
+# Example constraints for winding_landscape_v1.
+#
+# All sections are optional. Missing fields fall back to the documented defaults
+# defined in src/winding_landscape/config.py. Defaults that get applied are
+# logged in landscape_summary.json under "defaults_applied".
+#
+# Every numeric field is in SI (m -> mm where noted). All temperatures are degrees C.
+
+operating_targets:
+  # The continuous torque the design must hold without exceeding the winding
+  # temperature ceiling.
+  target_continuous_torque_Nm: 5.0
+
+  # Peak torque at the inverter's max phase current (saturation-derated).
+  target_peak_torque_Nm: 15.0
+
+  # Top speed the design must reach at the supply voltage. The voltage limit
+  # is computed as V_supply * modulation_margin / sqrt(3) > Ke * omega.
+  target_max_speed_rpm: 6000.0
+
+electrical_envelope:
+  # DC bus voltage at the inverter input.
+  supply_voltage_V: 48.0
+
+  # Inverter phase-current limit, RMS.
+  max_phase_current_A_rms: 30.0
+
+  # Fraction of the supply voltage usable for back-EMF after deadtime,
+  # commutation reserve, and modulation overhead. Typical 0.85-0.95.
+  modulation_margin: 0.90
+
+thermal_envelope:
+  ambient_temp_C: 40.0
+  max_winding_temp_C: 155.0           # Class F insulation default.
+  max_magnet_temp_C: 100.0            # Conservative for N42SH-grade NdFeB.
+  cooling_mode: "natural"             # One of: "natural", "forced_air", "liquid"
+
+  # Outer-housing-to-ambient thermal resistance. K/W. For an outrunner this
+  # is effectively the rotor's external surface to ambient. Typical:
+  #   - small drone motor (40 mm OD), natural convection: 1.0-2.0
+  #   - mid-size hub motor (100 mm OD), natural convection: 0.3-0.8
+  #   - liquid-cooled stator: 0.05-0.2
+  housing_thermal_resistance_K_per_W: 1.5
+
+  # Internal thermal conductivities. Rarely overridden, but available for
+  # tuning if you have measured values from your build process.
+  k_slot_liner_W_per_mK: 0.2          # Polyester / aramid liner.
+  k_winding_eff_W_per_mK: 0.5         # Impregnated copper bundle.
+  k_iron_radial_W_per_mK: 25.0        # Laminated electrical steel, radial direction.
+
+materials:
+  # Lookup keys into materials/data/{steels,magnets}.json.
+  steel_grade: "M19_29Ga"             # Available: M19_29Ga, M15_29Ga, Hiperco50
+  magnet_grade: "N42SH"               # Available: N42SH, N42UH, N52, SmCo28
+  wire_insulation_class: "F"          # IEC 60085 class. Sets max winding temp.
+
+manufacturing_constraints:
+  # Wire gauges available from your supplier.
+  available_wire_gauges_AWG: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+
+  # Slot liner thickness; reduces useful slot area.
+  min_slot_liner_thickness_mm: 0.25
+
+  # Achievable copper fill. Random round wire typically caps at 0.40-0.45.
+  # Higher values are achievable with hairpin (~0.65) and formed coils (~0.75)
+  # but those are V2+ manufacturing methods.
+  achievable_fill_factor_random: 0.42
+
+  # Bounds on the turns-per-coil sweep. The pipeline will enumerate every
+  # integer in [min_turns_per_coil, max_turns_per_coil] (subject to turns_step).
+  min_turns_per_coil: 5
+  max_turns_per_coil: 200
+
+topology_constraints:
+  # Inclusive even-integer range for the pole-count sweep.
+  pole_count_range: [4, 28]
+
+  # "auto" -> sweep all (Q, 2p) combos with q-denominator <= 8.
+  # Or supply a list like [[12, 10], [12, 8]] to restrict the sweep.
+  slot_pole_combos_to_consider: "auto"
+
+  # Currently V1 supports only "double" layer; "single" is wired but disabled.
+  layer_options: ["double"]
+
+  # Mechanical airgap (BREP is stator-only, so this comes from the constraints).
+  airgap_mm: 0.5
+
+  # Magnet thickness and arc fraction. The BREP doesn't include magnets.
+  magnet_thickness_mm: 3.0
+  magnet_arc_fraction: 0.83           # Fraction of the pole pitch covered by magnet material.
+
+enumeration_density:
+  # Target number of (turns, gauge) candidates per topology. The actual count
+  # may exceed this -- subsampling is only triggered above ~3x this number.
+  target_designs_per_topology: 50
+
+  # Step size in the turns sweep. Use 1 for the full landscape; 2-5 for a
+  # quicker scan during constraint-tuning.
+  turns_step: 1
+
+  # Cap on the number of (Q, 2p, layers, pitch) combinations evaluated.
+  # Topologies are ranked by the composite score
+  #     kw1 - 0.3*(|kw5|+|kw7|) - 0.1*(|kw11|+|kw13|) + 0.5*(1 - 1/LCM(Q,2p))
+  # and the top max_topologies are kept.
+  max_topologies: 20
+
+  # Minimum kw1 for a topology to be kept. 0.85 is a reasonable floor for
+  # serious motor design.
+  min_winding_factor_fundamental: 0.85

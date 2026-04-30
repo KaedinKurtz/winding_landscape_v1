@@ -1,0 +1,10 @@
+{
+  "_comment": "Insulation classes per IEC 60085. max_temp_C is the maximum continuous winding temperature for full rated lifetime.",
+  "A": {"max_temp_C": 105, "description": "Older systems; cotton/silk/cellulose with varnish."},
+  "E": {"max_temp_C": 120, "description": "Polyurethane enamels."},
+  "B": {"max_temp_C": 130, "description": "Polyester enamels, Class B."},
+  "F": {"max_temp_C": 155, "description": "Polyimide-overcoated polyester (most common modern motor wire)."},
+  "H": {"max_temp_C": 180, "description": "Pure polyimide. Higher cost but tolerates more thermal abuse."},
+  "N": {"max_temp_C": 200, "description": "Polyamide-imide, severe-duty."},
+  "R": {"max_temp_C": 220, "description": "Aromatic polyimide film, special-purpose."}
+}

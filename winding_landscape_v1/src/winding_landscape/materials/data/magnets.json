@@ -1,0 +1,43 @@
+{
+  "_comment": "NdFeB and SmCo grades. B_r, knee, and temperature coefficients are typical-of-grade values. Sources: Arnold Magnetic Technologies, Hitachi Metals, Vacuumschmelze public datasheets. Replace with vendor-specific values for production.",
+  "N42SH": {
+    "description": "NdFeB, 42 MGOe energy product, SH temperature class (max op ~150C).",
+    "B_r_at_20C_T": 1.30,
+    "B_r_temp_coefficient_per_C": -0.0012,
+    "demagnetization_knee_at_20C_T": 0.40,
+    "demagnetization_temp_coefficient_per_C": 0.005,
+    "max_operating_temp_C": 150,
+    "density_kg_per_m3": 7500,
+    "mu_recoil": 1.05
+  },
+  "N42UH": {
+    "description": "NdFeB, 42 MGOe, UH class (max op ~180C). For higher-temp applications.",
+    "B_r_at_20C_T": 1.29,
+    "B_r_temp_coefficient_per_C": -0.0011,
+    "demagnetization_knee_at_20C_T": 0.30,
+    "demagnetization_temp_coefficient_per_C": 0.004,
+    "max_operating_temp_C": 180,
+    "density_kg_per_m3": 7500,
+    "mu_recoil": 1.05
+  },
+  "N52": {
+    "description": "NdFeB, 52 MGOe, standard temp class (~80C). Highest energy product, lowest temp ceiling.",
+    "B_r_at_20C_T": 1.45,
+    "B_r_temp_coefficient_per_C": -0.0012,
+    "demagnetization_knee_at_20C_T": 0.55,
+    "demagnetization_temp_coefficient_per_C": 0.006,
+    "max_operating_temp_C": 80,
+    "density_kg_per_m3": 7550,
+    "mu_recoil": 1.05
+  },
+  "SmCo28": {
+    "description": "Samarium-cobalt, 28 MGOe. Lower energy product but excellent thermal stability.",
+    "B_r_at_20C_T": 1.10,
+    "B_r_temp_coefficient_per_C": -0.0003,
+    "demagnetization_knee_at_20C_T": 0.10,
+    "demagnetization_temp_coefficient_per_C": 0.001,
+    "max_operating_temp_C": 300,
+    "density_kg_per_m3": 8400,
+    "mu_recoil": 1.03
+  }
+}
