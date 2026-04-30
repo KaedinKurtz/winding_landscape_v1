@@ -19,16 +19,18 @@ dependencies = [
     "pydantic>=2.5",
     "pyyaml>=6.0",
     "build123d>=0.6",
-    "swat-em>=0.6.4",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.4",
     "pytest-cov>=4.1",
-    "mypy>=1.7",
-    "ruff>=0.1.6",
-    "hypothesis>=6.90",
+    "mypy>=1.8",
+    "ruff>=0.1.9",
+    "hypothesis>=6.92",
+]
+swat-em = [
+    "swat-em>=0.6.3 ; python_version < '3.12'",
 ]
 
 [project.scripts]
